@@ -6,8 +6,6 @@ import allTypeDefs from './typeDefs';
 // merge typeDefs from all modules
 const typeDefs = mergeTypeDefs([...allTypeDefs]);
 
-console.log('typeDefs', typeDefs);
-
 // create resolvers object
 const resolvers = {
   Query: {

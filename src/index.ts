@@ -16,7 +16,6 @@ const server = new ApolloServer({
 
 // start server
 server.listen().then(({ url }) => {
+  // eslint-ignore
   console.log(`Server ready at ${url}`);
 });
-x;
-xx

@@ -2,7 +2,7 @@ import { AssetsResolver } from '../assets.resolver';
 import { AssetsService } from '../assets.service';
 import { UsersService } from '../../users/users.service';
 import { mockAsset, mockAssets } from './mocks';
-import { mockUser, mockUsers, NULLED_PARAM } from '../../users/__tests__/mocks';
+import { mockUsers, NULLED_PARAM } from '../../users/__tests__/mocks';
 
 describe('AssetsResolver', () => {
   let assetsService: AssetsService;
