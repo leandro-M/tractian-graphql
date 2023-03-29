@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "precommit": "lint-staged",
+    "pre-commit": "lint-staged",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "dev": "ts-node-dev src/index.ts",
     "test": "jest --findRelatedTests",
@@ -59,7 +59,7 @@
   },
   "husky": {
     "hooks": {
-      "precommit": "lint-staged"
+      "pre-commit": "lint-staged"
     }
   }
 }
