@@ -1,8 +1,7 @@
 import { UsersResolver } from '../users.resolver';
 import { UsersService } from '../users.service';
-import { User } from '../users.model';
+import { mockUser, mockUsers, NULLED_PARAM } from './mocks'
 
-const NULLED_PARAM = undefined
 
 describe('UsersResolver', () => {
   let usersService: UsersService;
@@ -15,11 +14,6 @@ describe('UsersResolver', () => {
 
   describe('users', () => {
     it('should return an array of users', async () => {
-      // mock implementation of getAll() method in UsersService
-      const mockUsers: User[] = [
-        { companyId: 1, email: 'johndoe@example.com', id: 1, name: 'John Doe', unitId: 1 },
-        { companyId: 2, email: 'janedoe@example.com', id: 2, name: 'Jane Doe', unitId: 2 }
-      ];
       jest.spyOn(usersService, 'getAll').mockResolvedValueOnce(mockUsers);
 
       // call users resolver and expect the correct output
@@ -30,8 +24,6 @@ describe('UsersResolver', () => {
 
   describe('user', () => {
     it('should return a user by id', async () => {
-      // mock implementation of getById() method in UsersService
-      const mockUser: User = { companyId: 1, email: 'johndoe@example.com', id: 1, name: 'John Doe', unitId: 1 };
       jest.spyOn(usersService, 'getById').mockResolvedValueOnce(mockUser);
 
       // call user resolver and expect the correct output

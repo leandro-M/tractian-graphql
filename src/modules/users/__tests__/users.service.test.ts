@@ -2,6 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { AxiosInstance } from 'axios';
 import { UsersService } from '../users.service';
 import axiosInstance from '../../../utils/axios.instance';
+import { mockUser, mockUsers } from './mocks'
 
 describe('UsersService', () => {
   let axios: AxiosInstance;
@@ -19,44 +20,21 @@ describe('UsersService', () => {
 
   describe('getAll', () => {
     it('should return an array of users', async () => {
-      const mockResponse = [
-        {
-          id: 1,
-          name: 'John Doe',
-          email: 'johndoe@tractian.com',
-          companyId: 1,
-          unitId: 1
-        },
-        {
-          id: 2,
-          name: 'Jane Doe',
-          email: 'janedoe@tractian.com',
-          companyId: 1,
-          unitId: 1
-        }
-      ];
-      mockAxios.onGet('/users').reply(200, mockResponse);
+      mockAxios.onGet('/users').reply(200, mockUsers);
 
       const users = await usersService.getAll();
 
-      expect(users).toEqual(mockResponse);
+      expect(users).toEqual(mockUsers);
     });
   });
 
   describe('getById', () => {
     it('should return a user by id', async () => {
-      const mockResponse = {
-        id: 1,
-        name: 'John Doe',
-        email: 'johndoe@tractian.com',
-        companyId: 1,
-        unitId: 1
-      };
-      mockAxios.onGet('/users/1').reply(200, mockResponse);
+      mockAxios.onGet('/users/1').reply(200, mockUser);
 
       const user = await usersService.getById(1);
 
-      expect(user).toEqual(mockResponse);
+      expect(user).toEqual(mockUser);
     });
 
     it('should return empty when id does not exist', async () => {
