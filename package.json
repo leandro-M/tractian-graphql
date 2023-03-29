@@ -5,11 +5,10 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "prettier": "prettier --check '**/*.{ts,tsx,js,json}'",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "dev": "ts-node-dev src/index.ts",
-    "test": "jest",
-    "format": "prettier --write \"src/**/*.ts\""
+    "test": "jest --findRelatedTests",
+    "prettier": "prettier --write \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -54,7 +53,13 @@
     "**/*.{js,jsx,ts,tsx}": [
       "npm run lint",
       "npm run prettier",
+      "npm run test",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
