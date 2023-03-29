@@ -1,7 +1,6 @@
 import { UsersResolver } from '../users.resolver';
 import { UsersService } from '../users.service';
-import { mockUser, mockUsers, NULLED_PARAM } from './mocks'
-
+import { mockUser, mockUsers, NULLED_PARAM } from './mocks';
 
 describe('UsersResolver', () => {
   let usersService: UsersService;

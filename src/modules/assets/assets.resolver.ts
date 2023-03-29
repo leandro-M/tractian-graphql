@@ -14,7 +14,11 @@ export const AssetsResolver = {
     async assets(_: void, __: void, { assetsService }: { assetsService: AssetsService }): Promise<Asset[]> {
       return assetsService.getAll();
     },
-    async asset(_: void, { id }: { id: number }, { assetsService }: { assetsService: AssetsService }): Promise<Asset | null> {
+    async asset(
+      _: void,
+      { id }: { id: number },
+      { assetsService }: { assetsService: AssetsService },
+    ): Promise<Asset | null> {
       return assetsService.getById(id);
     },
   },

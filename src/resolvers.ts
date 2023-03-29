@@ -3,9 +3,9 @@ import { AssetsResolver } from './modules/assets/assets.resolver';
 
 export const queryResolvers = {
   ...UsersResolver.Query,
-  ...AssetsResolver.Query
-}
+  ...AssetsResolver.Query,
+};
 
 export const assetsResolvers = {
-  ...AssetsResolver.Asset
-}
+  ...AssetsResolver.Asset,
+};

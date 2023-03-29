@@ -2,7 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { AxiosInstance } from 'axios';
 import { UsersService } from '../users.service';
 import axiosInstance from '../../../utils/axios.instance';
-import { mockUser, mockUsers } from './mocks'
+import { mockUser, mockUsers } from './mocks';
 
 describe('UsersService', () => {
   let axios: AxiosInstance;

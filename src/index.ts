@@ -10,7 +10,7 @@ const schemaWithMiddleware = applyMiddleware(schema);
 const server = new ApolloServer({
   schema: schemaWithMiddleware,
   context: () => ({
-    ...context
+    ...context,
   }),
 });
 

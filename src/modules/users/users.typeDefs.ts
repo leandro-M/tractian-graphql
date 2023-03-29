@@ -8,7 +8,7 @@ export const userTypeDef = `
     email: String!
     unitId: Int!
   }
-`
+`;
 export const usersTypeDefs = gql`
   ${userTypeDef}
 
