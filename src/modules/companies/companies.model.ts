@@ -4,7 +4,6 @@ export interface Company {
 }
 
 export interface UpdateCompanyInput {
-  id: number;
   name?: string;
 }
 
