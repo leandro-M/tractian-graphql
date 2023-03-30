@@ -3,11 +3,7 @@ import { userTypeDef } from '../users/users.typeDefs';
 import { companyTypeDef } from '../companies/companies.typeDefs';
 import { unitTypeDefs } from '../units/units.typeDefs';
 
-export const assetsTypeDefs = gql`
-  ${userTypeDef}
-  ${companyTypeDef}
-  ${unitTypeDefs}
-
+export const assetTypeDef = `
   type Asset {
     assignedUsers: [User]
     company: Company
@@ -23,6 +19,13 @@ export const assetsTypeDefs = gql`
     status: String
     unit: Unit
   }
+`;
+
+export const assetsTypeDefs = gql`
+  ${userTypeDef}
+  ${companyTypeDef}
+  ${unitTypeDefs}
+  ${assetTypeDef}
 
   type HealthHistory {
     status: String

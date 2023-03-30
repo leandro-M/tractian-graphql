@@ -1,12 +1,15 @@
 import { gql } from 'apollo-server';
+import { unitTypeDefs } from '../units/units.typeDefs';
 
 export const userTypeDef = `
+  ${unitTypeDefs}
+
   type User {
     id: ID!
     companyId: Int!
     name: String!
     email: String!
-    unitId: Int!
+    unit: Unit
   }
 `;
 
