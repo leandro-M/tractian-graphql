@@ -22,6 +22,36 @@ export const workordersTypeDefs = gql`
     title: String!
   }
 
+  input CreateWorkOrderInput {
+    assetId: Int!
+    assignedUserIds: [Int!]!
+    checklist: [ChecklistItemInput]
+    description: String!
+    priority: String!
+    title: String!
+  }
+
+  input UpdateWorkOrderInput {
+    assetId: Int
+    assignedUserIds: [Int!]
+    checklist: [ChecklistItemInput]
+    description: String
+    priority: String
+    status: String
+    title: String
+  }
+
+  input ChecklistItemInput {
+    completed: Boolean!
+    task: String!
+  }
+
+  type Mutation {
+    createWorkOrder(input: CreateWorkOrderInput!): WorkOrder!
+    updateWorkOrder(id: ID!, input: UpdateWorkOrderInput!): WorkOrder!
+    deleteWorkOrder(id: ID!): Boolean!
+  }
+
   type Query {
     workorders: [WorkOrder]
     workorder(id: ID!): WorkOrder

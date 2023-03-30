@@ -13,3 +13,22 @@ export interface WorkOrder {
   status: string;
   title: string;
 }
+
+export interface CreateWorkOrderInput {
+  assetId: number;
+  assignedUserIds: number[];
+  checklist: ChecklistItem[];
+  description: string;
+  priority: string;
+  title: string;
+}
+
+export interface UpdateWorkOrderInput {
+  assetId?: number;
+  assignedUserIds?: number[];
+  checklist?: ChecklistItem[];
+  description?: string;
+  priority?: string;
+  status?: string;
+  title?: string;
+}

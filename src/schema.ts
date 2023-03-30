@@ -1,4 +1,4 @@
-import { othersResolvers, queryResolvers } from './resolvers';
+import { othersResolvers, queryResolvers, mutationsResolvers } from './resolvers';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import allTypeDefs from './typeDefs';
@@ -9,6 +9,7 @@ const typeDefs = mergeTypeDefs([...allTypeDefs]);
 // create resolvers object
 const resolvers = {
   ...queryResolvers,
+  ...mutationsResolvers,
   ...othersResolvers,
 };
 

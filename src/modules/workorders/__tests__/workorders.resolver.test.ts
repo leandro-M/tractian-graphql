@@ -70,3 +70,91 @@ describe('WorkOrdersResolver', () => {
     });
   });
 });
+
+describe('WorkOrdersResolver Mutation', () => {
+  let workOrdersService: WorkOrdersService;
+  let workOrdersResolver: any;
+
+  beforeEach(() => {
+    workOrdersService = new WorkOrdersService({} as any);
+    workOrdersResolver = WorkOrdersResolver;
+  });
+
+  describe('createWorkOrder', () => {
+    it('should create a new work order', async () => {
+      const input = {
+        ...mockWorkOrder,
+        assetId: 1,
+      };
+
+      jest.spyOn(workOrdersService, 'create').mockResolvedValueOnce(input);
+
+      // call createWorkOrder mutation and expect the correct output
+      const result = await workOrdersResolver.Mutation.createWorkOrder(null, { input }, { workOrdersService });
+      expect(result).toEqual(input);
+    });
+  });
+
+  describe('updateWorkOrder', () => {
+    it('should update an existing work order', async () => {
+      const id = 1;
+      const input = {
+        ...mockWorkOrder,
+        title: 'Updated Work Order',
+        description: 'This work order has been updated',
+        assignedUserIds: [2, 3],
+      };
+
+      const updatedWorkOrder = {
+        ...mockWorkOrder,
+        ...input,
+      };
+
+      jest.spyOn(workOrdersService, 'getById').mockResolvedValueOnce(updatedWorkOrder);
+      jest.spyOn(workOrdersService, 'update').mockResolvedValueOnce(updatedWorkOrder);
+
+      // call updateWorkOrder mutation and expect the correct output
+      const result = await workOrdersResolver.Mutation.updateWorkOrder(null, { id, input }, { workOrdersService });
+
+      expect(result).toEqual(updatedWorkOrder);
+      expect(workOrdersService.update).toHaveBeenCalledWith(id, input);
+    });
+
+    it('should return null if work order id does not exist', async () => {
+      const id = 999;
+      const input = {
+        title: 'Updated Work Order',
+        description: 'This work order has been updated',
+        assignedUserIds: [2, 3],
+      };
+
+      jest.spyOn(workOrdersService, 'update').mockResolvedValueOnce(null);
+
+      // call updateWorkOrder mutation and expect the correct output
+      const result = await workOrdersResolver.Mutation.updateWorkOrder(null, { id, input }, { workOrdersService });
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('deleteWorkOrder', () => {
+    it('should delete an existing work order', async () => {
+      const id = 1;
+
+      jest.spyOn(workOrdersService, 'delete').mockResolvedValueOnce(true);
+
+      // call deleteWorkOrder mutation and expect the correct output
+      const result = await workOrdersResolver.Mutation.deleteWorkOrder(null, { id }, { workOrdersService });
+      expect(result).toBe(true);
+    });
+
+    it('should return false if work order id does not exist', async () => {
+      const id = 999;
+
+      jest.spyOn(workOrdersService, 'delete').mockResolvedValueOnce(false);
+
+      // call deleteWorkOrder mutation and expect the correct output
+      const result = await workOrdersResolver.Mutation.deleteWorkOrder(null, { id }, { workOrdersService });
+      expect(result).toBe(false);
+    });
+  });
+});

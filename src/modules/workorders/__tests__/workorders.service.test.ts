@@ -43,4 +43,62 @@ describe('WorkOrdersService', () => {
       expect(workOrder).toBeNull();
     });
   });
+
+  describe('create', () => {
+    it('should create a new work order', async () => {
+      mockAxios.onPost('/workorders').reply(200, mockWorkOrder);
+
+      const result = await workOrdersService.create(mockWorkOrder);
+
+      expect(result).toEqual(mockWorkOrder);
+    });
+  });
+
+  describe('update', () => {
+    it('should update an existing work order', async () => {
+      const id = 1;
+      const payload = {
+        description: 'Updated work order description',
+        title: 'Updated work order title',
+      };
+      mockAxios.onPut(`/workorders/${id}`).reply(200, mockWorkOrder);
+
+      const result = await workOrdersService.update(id, payload);
+
+      expect(result).toEqual(mockWorkOrder);
+    });
+
+    it('should return null when updating a non-existing work order', async () => {
+      const id = 9999;
+      const payload = {
+        description: 'Updated work order description',
+        title: 'Updated work order title',
+      };
+      mockAxios.onPut(`/workorders/${id}`).reply(200);
+
+      const result = await workOrdersService.update(id, payload);
+
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('delete', () => {
+    it('should delete an existing work order', async () => {
+      const id = 1;
+      mockAxios.onDelete(`/workorders/${id}`).reply(200);
+
+      const result = await workOrdersService.delete(id);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false when deleting a non-existing work order', async () => {
+      const id = 9999;
+      mockAxios.onDelete(`/workorders/${id}`).reply(404);
+
+      const result = await workOrdersService.delete(id);
+
+      expect(result).toBe(false);
+    });
+  });
 });

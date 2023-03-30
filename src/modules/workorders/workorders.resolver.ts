@@ -2,7 +2,7 @@ import { WorkOrdersService } from './workorders.service';
 import { UsersService } from '../users/users.service';
 import { AssetsService } from '../assets/assets.service';
 
-import { WorkOrder } from './workorders.model';
+import { WorkOrder, CreateWorkOrderInput, UpdateWorkOrderInput } from './workorders.model';
 
 export const WorkOrdersResolver = {
   WorkOrder: {
@@ -29,6 +29,29 @@ export const WorkOrdersResolver = {
       { workOrdersService }: { workOrdersService: WorkOrdersService },
     ): Promise<WorkOrder | null> {
       return workOrdersService.getById(id);
+    },
+  },
+  Mutation: {
+    createWorkOrder: async (
+      _: void,
+      { input }: { input: CreateWorkOrderInput },
+      { workOrdersService }: { workOrdersService: WorkOrdersService },
+    ): Promise<WorkOrder> => {
+      return workOrdersService.create(input);
+    },
+    updateWorkOrder: async (
+      _: void,
+      { id, input }: { id: number; input: UpdateWorkOrderInput },
+      { workOrdersService }: { workOrdersService: WorkOrdersService },
+    ): Promise<WorkOrder | null> => {
+      return workOrdersService.update(id, input);
+    },
+    deleteWorkOrder: async (
+      _: void,
+      { id }: { id: number },
+      { workOrdersService }: { workOrdersService: WorkOrdersService },
+    ): Promise<boolean> => {
+      return workOrdersService.delete(id);
     },
   },
 };

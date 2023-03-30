@@ -9,6 +9,7 @@ const schemaWithMiddleware = applyMiddleware(schema);
 // create ApolloServer instance
 const server = new ApolloServer({
   schema: schemaWithMiddleware,
+  logger: console,
   context: () => ({
     ...context,
   }),
