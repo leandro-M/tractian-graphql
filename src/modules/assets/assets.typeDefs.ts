@@ -1,13 +1,15 @@
 import { gql } from 'apollo-server';
 import { userTypeDef } from '../users/users.typeDefs';
+import { companyTypeDef } from '../companies/companies.typeDefs';
 
 export const assetsTypeDefs = gql`
   ${userTypeDef}
+  ${companyTypeDef}
 
   type Asset {
     assignedUserIds: [Int]
     assignedUsers: [User]
-    companyId: Int
+    company: Company
     healthHistory: [HealthHistory]
     healthscore: Float
     id: Int
