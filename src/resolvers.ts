@@ -19,6 +19,7 @@ export const mutationsResolvers = {
     ...WorkOrdersResolver.Mutation,
     ...AssetsResolver.Mutation,
     ...CompaniesResolver.Mutation,
+    ...UnitsResolver.Mutation,
   },
 };
 

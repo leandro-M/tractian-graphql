@@ -61,4 +61,64 @@ describe('UnitsResolver', () => {
       expect(result).toBeNull();
     });
   });
+
+  describe('createUnit', () => {
+    it('should create a new unit', async () => {
+      const input = { companyId: 1, name: 'Test Unit' };
+      mockAxios.onPost('/units', input).reply(200, mockUnit);
+
+      const result = await UnitsResolver.Mutation.createUnit(NULLED_PARAM, { input }, { unitsService });
+
+      expect(result).toEqual(mockUnit);
+    });
+  });
+
+  describe('updateUnit', () => {
+    it('should update a unit successfully', async () => {
+      const updatedUnit = {
+        id: mockUnit.id,
+        companyId: mockUnit.companyId,
+        name: 'Updated Unit Name',
+      };
+
+      mockAxios.onPut(`/units/${mockUnit.id}`).reply(200, updatedUnit);
+
+      const result = await UnitsResolver.Mutation.updateUnit(
+        NULLED_PARAM,
+        { id: mockUnit.id, input: updatedUnit },
+        { unitsService },
+      );
+
+      expect(result).toEqual(updatedUnit);
+    });
+
+    it('should return null if unit id does not exist', async () => {
+      const updatedUnit = {
+        id: 999,
+        companyId: 1,
+        name: 'Updated Unit Name',
+      };
+
+      mockAxios.onPut(`/units/${updatedUnit.id}`).reply(200);
+
+      const result = await UnitsResolver.Mutation.updateUnit(
+        NULLED_PARAM,
+        { id: updatedUnit.id, input: updatedUnit },
+        { unitsService },
+      );
+
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('deleteUnit', () => {
+    it('should return true when successfully deleting a unit', async () => {
+      const id = 1;
+      mockAxios.onDelete(`/units/${id}`).reply(200);
+
+      const result = await UnitsResolver.Mutation.deleteUnit(NULLED_PARAM, { id }, { unitsService });
+
+      expect(result).toBe(true);
+    });
+  });
 });

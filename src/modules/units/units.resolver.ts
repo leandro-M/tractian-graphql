@@ -1,7 +1,7 @@
 import { UnitsService } from './units.service';
 import { CompaniesService } from '../companies/companies.service';
 
-import { Unit } from './units.model';
+import { CreateUnitInput, Unit, UpdateUnitInput } from './units.model';
 
 export const UnitsResolver = {
   Unit: {
@@ -20,6 +20,29 @@ export const UnitsResolver = {
       { unitsService }: { unitsService: UnitsService },
     ): Promise<Unit | null> {
       return unitsService.getById(id);
+    },
+  },
+  Mutation: {
+    async createUnit(
+      _: void,
+      { input }: { input: CreateUnitInput },
+      { unitsService }: { unitsService: UnitsService },
+    ): Promise<Unit> {
+      return unitsService.create(input);
+    },
+    async updateUnit(
+      _: void,
+      { id, input }: { id: number; input: UpdateUnitInput },
+      { unitsService }: { unitsService: UnitsService },
+    ): Promise<Unit | null> {
+      return unitsService.update(id, input);
+    },
+    async deleteUnit(
+      _: void,
+      { id }: { id: number },
+      { unitsService }: { unitsService: UnitsService },
+    ): Promise<boolean> {
+      return unitsService.delete(id);
     },
   },
 };
