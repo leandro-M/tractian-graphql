@@ -40,6 +40,61 @@ export const assetsTypeDefs = gql`
 
   type Specifications {
     maxTemp: Int
+    power: Int
+    rpm: Int
+  }
+
+  input HealthHistoryInput {
+    status: String!
+    timestamp: String!
+  }
+
+  input MetricsInput {
+    lastUptimeAt: String!
+    totalCollectsUptime: Int!
+    totalUptime: Float!
+  }
+
+  input SpecificationsInput {
+    maxTemp: Int!
+    power: Int
+    rpm: Int
+  }
+
+  input CreateAssetInput {
+    assignedUserIds: [Int]
+    companyId: Int
+    healthHistory: [HealthHistoryInput]
+    metrics: MetricsInput
+    sensors: [String]
+    healthscore: Float
+    image: String
+    model: String
+    name: String!
+    sensorIds: [Int]
+    specifications: SpecificationsInput
+    status: String
+    unitId: Int!
+  }
+
+  input UpdateAssetInput {
+    assignedUserIds: [Int]
+    companyId: Int
+    healthscore: Float
+    id: Int!
+    image: String
+    model: String
+    name: String!
+    sensorIds: [Int]
+    specifications: SpecificationsInput
+    status: String
+    unitId: Int!
+  }
+
+  type Mutation {
+    createAsset(input: CreateAssetInput!): Asset!
+    updateAsset(input: UpdateAssetInput!): Asset!
+    deleteAsset(id: ID!): Boolean!
   }
 
   type Query {

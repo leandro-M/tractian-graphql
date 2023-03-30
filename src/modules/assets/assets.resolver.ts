@@ -3,7 +3,7 @@ import { UsersService } from '../users/users.service';
 import { CompaniesService } from '../companies/companies.service';
 import { UnitsService } from '../units/units.service';
 
-import { Asset } from './assets.model';
+import { Asset, CreateAssetInput, UpdateAssetInput } from './assets.model';
 
 export const AssetsResolver = {
   Asset: {
@@ -30,6 +30,29 @@ export const AssetsResolver = {
       { assetsService }: { assetsService: AssetsService },
     ): Promise<Asset | null> {
       return assetsService.getById(id);
+    },
+  },
+  Mutation: {
+    async createAsset(
+      _: void,
+      { input }: { input: CreateAssetInput },
+      { assetsService }: { assetsService: AssetsService },
+    ): Promise<Asset> {
+      return assetsService.create(input);
+    },
+    async updateAsset(
+      _: void,
+      { id, input }: { id: number; input: UpdateAssetInput },
+      { assetsService }: { assetsService: AssetsService },
+    ): Promise<Asset | null> {
+      return assetsService.update(id, input);
+    },
+    async deleteAsset(
+      _: void,
+      { id }: { id: number },
+      { assetsService }: { assetsService: AssetsService },
+    ): Promise<boolean> {
+      return assetsService.delete(id);
     },
   },
 };

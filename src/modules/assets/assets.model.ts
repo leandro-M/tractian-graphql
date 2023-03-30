@@ -30,3 +30,31 @@ export interface Asset {
   status: string;
   unitId: number;
 }
+
+export interface CreateAssetInput {
+  assignedUserIds: number[];
+  companyId: number;
+  healthscore: number;
+  image: string;
+  model: string;
+  name: string;
+  sensors: string[];
+  specifications: TSpecifications;
+  status: string;
+  unitId: number;
+}
+
+export interface UpdateAssetInput {
+  assignedUserIds?: number[];
+  companyId?: number;
+  healthHistory?: THealthHistory[];
+  healthscore?: number;
+  image?: string;
+  metrics?: TMetrics;
+  model?: string;
+  name?: string;
+  sensors?: string[];
+  specifications?: TSpecifications;
+  status?: string;
+  unitId?: number;
+}
