@@ -9,6 +9,7 @@ export const userTypeDef = `
     unitId: Int!
   }
 `;
+
 export const usersTypeDefs = gql`
   ${userTypeDef}
 
